@@ -35,13 +35,16 @@ def compute():
 
 @app.route('/end/')
 def end():
-    score = request.args.get('score')
+    output = request.args.get('score')[1:-1].split(",")
+    print (output)
 
-    escore = request.args.get('escore')
-    fscore = request.args.get('fscore')
-    print (score)
-    print (type(score))
-    return render_template("end.html", emotional_score=score)
+    escore = "{0:.2f}%".format(float(output[0][9:]))
+    fscore = "{0:.2f}%".format(float(output[1][9:]))
+    total = "{0:.2f}%".format(float(output[2][8:]))
+    print (escore)
+    print (fscore)
+    print (total)
+    return render_template("end.html", score=total, escore=escore, fscore=fscore)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
