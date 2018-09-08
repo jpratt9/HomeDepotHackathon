@@ -2,6 +2,7 @@
 import cv2
 import math
 import numpy
+import face_recognition
 import requests
 subscription_key = "526937c01fbc44d6a79439d31e232fbb"
 face_api_url = "https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect"
@@ -9,15 +10,45 @@ face_api_url = "https://westcentralus.api.cognitive.microsoft.com/face/v1.0/dete
 
 
 def main():
-    image1 = "face2.jpg"
-    image2 = "face1.jpg"
-    image1 = cv2.imread(image1)
-    image2 = cv2.imread(image2)
-    face1 = crop_face(image1)
-    face2 = crop_face(image2)
+    image1 = "temp2.jpg"
+    image2 = "temp_image.jpg"
+    evaluate_faces(image1, image2)
+    
+def evaluate_faces(image1, image2):
+    img1 = cv2.imread(image1)
+    img2 = cv2.imread(image2)
+    face1 = crop_face(img1)
+    face2 = crop_face(img2)
     score = emotion_score(face1,face2)
-    print(score)
+    scoref = face_ecoding_score(image1,image2)
+    print("Facial Feature Score", scoref)
+    print("Emotion Comparison Score", score)
 
+
+def face_ecoding_score(a, b):
+    face1 = face_recognition.load_image_file(a)
+    face2 = face_recognition.load_image_file(b)
+
+    face1_encoding = face_recognition.face_encodings(face1)[0]
+    face2_encoding = face_recognition.face_encodings(face2)[0]
+
+    results = face_recognition.compare_faces([face1_encoding], face1_encoding)
+    print (results)
+
+    face1l = numpy.ndarray.tolist(face1_encoding)
+    face2l = numpy.ndarray.tolist(face2_encoding)
+
+    norm1 = [float(i)/numpy.linalg.norm(face1l) for i in face1l]
+    norm2 = [float(i)/numpy.linalg.norm(face2l) for i in face2l]
+    print(sum(norm1))
+    print(sum(norm2))
+    score = 0
+    for i in range(len(norm1)):
+        score += math.pow(norm1[i] - norm2[i], 2)
+    score = math.sqrt(score)
+    print(score)
+    score = ((math.sqrt(2) - score * 1.0) / math.sqrt(2)) * 100
+    return score
 
 def emotion_score(a, b):
     emotion_a = compute_emotion(a)
