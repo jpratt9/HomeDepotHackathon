@@ -368,9 +368,9 @@ a:hover, a:active {
 
 .portfolio-content figure img {
     display: block;
-    width: 100%;
+    width: 94%;
     height: auto;
-    min-height: 100%;
+    min-height: 94%;
 }
 
 .portfolio-content .entry-content {
@@ -410,7 +410,7 @@ a:hover, a:active {
 
 .portfolio-content ul {
     padding: 0;
-    margin: 10px 0 0;
+    margin: 5px 0 0;
     list-style: none;
 }
 

@@ -14,9 +14,9 @@ def index():
 def select():
     return render_template("select.html")
 
-@app.route('/takepicture/')
-def takepicture():
-    return render_template("takepicture.html")
+@app.route('/play/')
+def play():
+    return render_template("play.html")
 
 @app.route('/compute/')
 def compute():
