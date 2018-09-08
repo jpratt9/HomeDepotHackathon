@@ -40,14 +40,9 @@
     document.getElementById("test").addEventListener("click", function () {
 
         var xhr = new XMLHttpRequest();
-        var major = document.getElementById("major").value;
-        var params = "major=" + major + "&num=-1&ans=0".toString();
-        var path = "/survey/?params=" + params;
-        {#    xhr.open('GET', path, false);#}
-        {#    xhr.send();#}
+        var path = "/select/";
         window.location.href = path;
         return xhr.responseText;
-        }
     });
 </script>
 </body>
