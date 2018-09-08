@@ -10,8 +10,8 @@ face_api_url = "https://westcentralus.api.cognitive.microsoft.com/face/v1.0/dete
 
 
 def main():
-    image1 = "biden.jpg"
-    image2 = "biden2.jpg"
+    image1 = "biden1.jpg"
+    image2 = "test.jpg"
     # image1 = cv2.imread(image1)
     # image2 = cv2.imread(image2)
     # face1 = crop_face(image1)
@@ -42,6 +42,7 @@ def face_ecoding_score(a, b):
         score += math.pow(norm1[i] - norm2[i], 2)
     score = math.sqrt(score)
     print(score)
+    maxsc = 
     score = ((math.sqrt(2) - score * 1.0) / math.sqrt(2)) * 100
     return score
 
