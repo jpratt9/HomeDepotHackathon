@@ -10,16 +10,25 @@ function take_snapshot() {
     var file = new File([imageBlob], "image.jpg", {type: "image/jpeg"});
     console.log(file);
     var form = document.getElementById('myForm');
+    var img_name = document.getElementById("helperp").value;
+    console.log(img_name);
     var formData = new FormData(form);
     formData.append("file", file);
+    formData.append("img_name", img_name);
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("POST", "/compute/");
+    var url = "/compute?img=" + img_name;
+    xmlhttp.open("POST", url);
 
-    // xmlhttp.onreadystatechange = function() {
-    //
-    // if(xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-    //     }
-    // };
+    xmlhttp.onreadystatechange = function() {
+
+    if(this.readyState == 4 && this.status == 200) {
+        alert(typeof this.responseText);
+        var score = this.responseText["total"];
+        var escore = this.responseText["escore"];
+        var fscore = this.responseText["fscore"];
+        window.location = "/end?score=" + score + "&escore=" + escore + "&fscore=" +fscore;
+    }
+    };
 
     xmlhttp.send(formData);
     console.log(formData.get('file'));
