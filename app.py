@@ -2,6 +2,7 @@
 import cv2
 import math
 import numpy
+import face_recognition
 import requests
 subscription_key = "526937c01fbc44d6a79439d31e232fbb"
 face_api_url = "https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect"
@@ -15,9 +16,32 @@ def main():
     image2 = cv2.imread(image2)
     face1 = crop_face(image1)
     face2 = crop_face(image2)
-    score = emotion_score(face1,face2)
+    # score = emotion_score(face1,face2)
+    score = face_ecoding_score(image1,image2)
     print(score)
 
+
+def face_ecoding_score(a, b):
+    face1 = face_recognition.load_image_file(a)
+    face2 = face_recognition.load_image_file(b)
+
+    face1_encoding = face_recognition.face_encodings(face1)[0]
+    face2_encoding = face_recognition.face_encodings(face2)[0]
+
+    results = face_recognition.compare_faces([face1_encoding], face1_encoding)
+    print (results)
+
+    face1l = numpy.ndarray.tolist(face1_encoding)
+    face2l = numpy.ndarray.tolist(face2_encoding)
+
+    norm1 = [float(i)/sum(face1l) for i in face1l]
+    norm2 = [float(i)/sum(face2l) for i in face2l]
+
+    score = 0
+    for i in range(len(norm1)):
+        score += math.pow(norm1[i] - norm2[i], 2)
+    score = math.sqrt(score)
+    return score
 
 def emotion_score(a, b):
     emotion_a = compute_emotion(a)
