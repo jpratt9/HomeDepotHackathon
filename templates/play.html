@@ -2,21 +2,20 @@
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="../static/bootstrap.css" rel="stylesheet">
     <title>FaceIt - Capture Image</title>
     <style type="text/css">
         /*#my_camera {display : inline-block; margin: 20px }*/
         #results { float:right; margin:20px; padding:20px; border:1px solid; }
-
     </style>
 <body>
-<script src="js/jquery-3.1.1.js"></script>
-<script src="js/jquery-3.1.1.min.js"></script>
-<script src="js/bootstrap.js"></script>
+<script src="../static/jquery-3.1.1.js"></script>
+<script src="../static/jquery-3.1.1.min.js"></script>
+<script src="../static/bootstrap.js"></script>
 <script src="http://e-cdn-files.deezer.com/js/min/dz.js"></script>
-<script type="text/javascript" src="webcam.js"></script>
-<script src="js/imageProcessing.js"></script>
-<script src="js/FileSaver.js"></script>
+<script type="text/javascript" src="..static/webcam.js"></script>
+<script src="../static/imageProcessing.js"></script>
+<script src="../static/FileSaver.js"></script>
 
 
 
@@ -45,7 +44,7 @@
     <h3>Try to copy the emotions of the face you selected.</h3>
 </div>
 <!--<h3>Demonstrates simple 320x240 capture &amp; display</h3></div>-->
-<div class="container col-md-6 style="width: 10px; height: 20px;"><img src = "bg3.jpg"></div>
+<div class="container col-md-6"></div>
 <div class="container col-md-2" id="main">
     <div id="my_camera"></div>
     <!-- Configure a few settings and attach camera -->
@@ -66,7 +65,7 @@
     <!--<div id="results" style="float: right">Your captured image will appear here...</div>-->
 </div>
 <button id = "end" class="btn-lg" style="align-self: center" onclick="window.location='http://localhost/musivision/play.html'">Take</button>
-<script src="js/emotionRecognition.js"></script>
+<script src="../static/emotionRecognition.js"></script>
 
 </body>
 </html>
