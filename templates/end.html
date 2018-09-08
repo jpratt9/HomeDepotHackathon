@@ -8,11 +8,10 @@
           type="text/css">
     <link rel="stylesheet" href="../static/theme.css" type="text/css">
     <link rel="stylesheet" href="../static/animate.css" type="text/css">
-    <title>Ethically Fit</title>
+    <title>FaceIt</title>
 </head>
 
 <body>
-{#<div style="position:absolute;top:0;right:0;" id="curmaj">Selected major is{{ maj }}</div>#}
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="/">Home</a>
 </nav>
@@ -22,13 +21,10 @@
         <div class="row fadeInDown" style="-webkit-animation-duration: 1.5s">
             <div class="col-md-12">
                 <h3 class="display-4 mb-4 text-white">
-                    <b>Thank You!</b>
+                    <b>Score: {{ emotional_score }}</b>
                 </h3>
                 <p class="lead mb-5 fadeInDown" style="background-color: #0f988d; color: #0b0b0b">
-                    <b class="text-white">Thank you for taking this test. These are your results: </b><br>
-                    {% for item in out %}
-                        {{ item[0]}}  = {{ item[1] }}% <br>
-                    {% endfor %}
+                    Additional Facial Features Score: {{facial_score}}
                 </p>
 
             </div>
