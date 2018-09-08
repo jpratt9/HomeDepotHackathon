@@ -71,7 +71,7 @@
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.open("POST", "/compute/");
         var total = document.getElementById("total");
-        total.innerHTML = "<div class='container col-md-6'><img src='../static/loader.gif'></img></div>";
+        total.innerHTML = "<div class='container col-md-4'></div><img src='../static/loader2.gif'></img>";
         xmlhttp.onreadystatechange = function() {
 
         if(this.readyState == 4 && this.status == 200) {
