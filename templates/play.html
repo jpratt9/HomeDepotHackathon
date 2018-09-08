@@ -70,7 +70,8 @@
         console.log(img_name);
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.open("POST", "/compute/");
-
+        var total = document.getElementById("total");
+        total.innerHTML = "<div class='container col-md-6'><img src='../static/loader.gif'></img></div>";
         xmlhttp.onreadystatechange = function() {
 
         if(this.readyState == 4 && this.status == 200) {
@@ -82,6 +83,23 @@
         xmlhttp.send(formData);
         console.log(formData.get('file'));
     }
+
+    function createDialog(title, text) {
+    return $("<div class='dialog' title='" + title + "'><p>" + text + "</p></div>")
+    .dialog({
+        resizable: false,
+        height:140,
+        modal: true,
+        buttons: {
+            "Confirm": function() {
+                $( this ).dialog( "close" );
+            },
+            Cancel: function() {
+                $( this ).dialog( "close" );
+            }
+        }
+    });
+}
 </script>
 
 </div>
