@@ -10,12 +10,12 @@ face_api_url = "https://westcentralus.api.cognitive.microsoft.com/face/v1.0/dete
 
 
 def main():
-    image1 = "face2.jpg"
-    image2 = "face1.jpg"
-    image1 = cv2.imread(image1)
-    image2 = cv2.imread(image2)
-    face1 = crop_face(image1)
-    face2 = crop_face(image2)
+    image1 = "biden.jpg"
+    image2 = "biden2.jpg"
+    # image1 = cv2.imread(image1)
+    # image2 = cv2.imread(image2)
+    # face1 = crop_face(image1)
+    # face2 = crop_face(image2)
     # score = emotion_score(face1,face2)
     score = face_ecoding_score(image1,image2)
     print(score)
@@ -41,6 +41,8 @@ def face_ecoding_score(a, b):
     for i in range(len(norm1)):
         score += math.pow(norm1[i] - norm2[i], 2)
     score = math.sqrt(score)
+    print(score)
+    score = ((math.sqrt(2) - score * 1.0) / math.sqrt(2)) * 100
     return score
 
 def emotion_score(a, b):
