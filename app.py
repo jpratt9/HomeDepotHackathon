@@ -10,15 +10,19 @@ face_api_url = "https://westcentralus.api.cognitive.microsoft.com/face/v1.0/dete
 
 
 def main():
-    image1 = "biden1.jpg"
-    image2 = "test.jpg"
-    # image1 = cv2.imread(image1)
-    # image2 = cv2.imread(image2)
-    # face1 = crop_face(image1)
-    # face2 = crop_face(image2)
-    # score = emotion_score(face1,face2)
-    score = face_ecoding_score(image1,image2)
-    print(score)
+    image1 = "temp2.jpg"
+    image2 = "temp_image.jpg"
+    evaluate_faces(image1, image2)
+    
+def evaluate_faces(image1, image2):
+    img1 = cv2.imread(image1)
+    img2 = cv2.imread(image2)
+    face1 = crop_face(img1)
+    face2 = crop_face(img2)
+    score = emotion_score(face1,face2)
+    scoref = face_ecoding_score(image1,image2)
+    print("Facial Feature Score", scoref)
+    print("Emotion Comparison Score", score)
 
 
 def face_ecoding_score(a, b):
@@ -34,15 +38,15 @@ def face_ecoding_score(a, b):
     face1l = numpy.ndarray.tolist(face1_encoding)
     face2l = numpy.ndarray.tolist(face2_encoding)
 
-    norm1 = [float(i)/sum(face1l) for i in face1l]
-    norm2 = [float(i)/sum(face2l) for i in face2l]
-
+    norm1 = [float(i)/numpy.linalg.norm(face1l) for i in face1l]
+    norm2 = [float(i)/numpy.linalg.norm(face2l) for i in face2l]
+    print(sum(norm1))
+    print(sum(norm2))
     score = 0
     for i in range(len(norm1)):
         score += math.pow(norm1[i] - norm2[i], 2)
     score = math.sqrt(score)
     print(score)
-    maxsc = 
     score = ((math.sqrt(2) - score * 1.0) / math.sqrt(2)) * 100
     return score
 
