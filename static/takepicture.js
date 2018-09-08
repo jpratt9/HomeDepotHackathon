@@ -18,7 +18,6 @@ function take_snapshot() {
     var xmlhttp = new XMLHttpRequest();
     var url = "/compute?img=" + img_name;
     xmlhttp.open("POST", url);
-
     xmlhttp.onreadystatechange = function() {
 
     if(this.readyState == 4 && this.status == 200) {
@@ -34,3 +33,12 @@ function take_snapshot() {
     console.log(formData.get('file'));
 }
 
+function waitSeconds(iMilliSeconds) {
+    var counter= 0
+        , start = new Date().getTime()
+        , end = 0;
+    while (counter < iMilliSeconds) {
+        end = new Date().getTime();
+        counter = end - start;
+    }
+}

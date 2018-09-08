@@ -1,5 +1,5 @@
 import unittest
-from app import *
+from evaluate_faces import *
 
 class TestStringMethods(unittest.TestCase):
 
