@@ -18,8 +18,12 @@ def select():
 def play():
     return render_template("play.html")
 
-@app.route('/compute/')
+@app.route('/compute/', methods=['GET','POST'])
 def compute():
+    print ("here")
+    if request.method == 'POST':
+        image = request.files.get('file', '')
+        image.save("./snapshot.jpg")
     return render_template("end.html")
 
 if __name__ == '__main__':
